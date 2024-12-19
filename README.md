@@ -23,7 +23,7 @@ This repository provides Python code for communicating with Luminox devices.
 #### Clone this repository:
 
 ```bash
-git clone ADD REPO CLONE LINK
+git https://github.com/ProcessSensingTechnologies/luminox_usart_python.git
 ```
 
 #### Install dependencies:
