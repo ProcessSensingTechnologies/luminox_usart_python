@@ -1,8 +1,11 @@
 # Luminox USART Communication with Python
 
 See UG-001_LuminOx_UserGuide for full implementation details for LOX-01
+
 See UG-007_LOX-02-S_UserGuide for full implementation details for LOX-02-S
+
 See UG-008_LOX-02-F_UserGuide for full implementation details for LOX-02-F
+
 
 This repository provides Python code for communicating with Luminox devices.
 
