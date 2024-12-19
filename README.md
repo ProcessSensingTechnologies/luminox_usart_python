@@ -1,10 +1,10 @@
-# PROJECT NAME HERE
+# Luminox USART Communication with Python
 
-**.gitkeep FILES ARE USED TO KEEP EMPTY FOLDERS IN THE REPO. THIS FILE CAN BE DELETED WHEN FOLDERS ARE USED OR NO LONGER REQUIRED. DELETE THIS LINE IN STANDARD REPO README**
+See UG-001_LuminOx_UserGuide for full implementation details for LOX-01
+See UG-007_LOX-02-S_UserGuide for full implementation details for LOX-02-S
+See UG-008_LOX-02-F_UserGuide for full implementation details for LOX-02-F
 
-See PST DOCUMENTS for full implementation details for PRODUCT
-
-This repository provides Python code for COMPLETE USE CASE
+This repository provides Python code for communicating with Luminox devices.
 
 ## Getting Started
 
@@ -12,9 +12,11 @@ This repository provides Python code for COMPLETE USE CASE
 
 - Python 3.11 or newer (https://www.python.org/downloads/)
     - Older Python revisions are untested but may work.
-- ANY MAIN PACKAGES THAT MAY NEED A SHORT DESCRIPTION:
-    - Recommended: ADD HERE
-- ANY HARDWARE REQUIRED
+- Python library for serial communication:
+    - Recommended: pyserial
+- A USB-to-ttl converter compatible with your system and the Luminox.
+    - Recommended: PST Dev kit - Luminox
+
 
 ### Installation
 
@@ -28,7 +30,7 @@ git clone ADD REPO CLONE LINK
 
 *It is highly recommended to use a virtual environment to isolate your project's dependencies and avoid conflicts with other Python projects.*
 ```Bash
-cd RENAME SRC FOR PROJECT
+cd luminox_usart_python
 
 python -m pip install -r requirements.txt
 ```
