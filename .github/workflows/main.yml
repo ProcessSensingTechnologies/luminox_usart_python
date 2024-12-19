@@ -1,0 +1,72 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Create Documentation and deploy static to pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Job to create the documentation using pdoc
+  create_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13' 
+      - name: update pip and install dependences
+        run: |
+          python -m pip install --upgrade pip
+          pip install pdoc
+          pip install -r requirements.txt
+      - name: Create docs
+        run: |
+          python -m pdoc luminox -o ./docs
+      - name: git commit and push docs
+        run: |
+          git config --global user.email "$(git log -n 1 --pretty=format:%ae)"
+          git config --global user.name "$(git log -n 1 --pretty=format:%an)"
+          git add docs
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Docs Upload"
+            git push
+          fi
+
+  # Job to deploy the documentation to pages
+  deploy-docs:
+    needs: create_docs
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload docs only
+          path: './docs'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
