@@ -39,7 +39,9 @@ python -m pip install -r requirements.txt
 ```
 ## Usage
 
--
+A basic example that simply polls the sensor for O2 percent readings can be found in `example_basic.py`
+
+For more in-depth usage the `Lox` class in `luminox.py` can be used. It's functionality is demonstrated in `example_1.py`.
 
 ## Additional Notes
 
